@@ -17,3 +17,7 @@ On the remote machine copy the contents of id_rsa.pub to
 echo "<contents of your public key>" >> ~/.ssh/authorized_keys
 ```
 
+To enable key-based authentication run `ssh` with a `-i` option
+```
+ssh -i ~/.ssh/<your_private_key> <your-remote-machine>
+```
