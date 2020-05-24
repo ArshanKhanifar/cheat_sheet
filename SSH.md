@@ -5,7 +5,6 @@
 Run `ssh` with -v.
 
 ## Key-based Authentication
-
 On the client machine do: 
 ```
 ssh-keygen -t rsa -b 2048
@@ -21,3 +20,25 @@ To enable key-based authentication run `ssh` with a `-i` option
 ```
 ssh -i ~/.ssh/<your_private_key> <your-remote-machine>
 ```
+
+### Copying Shortcut
+There's this command: `ssh-copy-id` that makes it easier:
+```
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@remote
+```
+
+## Fixed Issues
+#### Permissions can be too open!
+Once I had the permissions on the `authorized_keys` file on the remote machine as:
+```
+-rw-rw-rw- 1 username users 590 May 22 11:29 authorized_keys
+```
+Turns out permissions can be too open! So I changed it to be used only by the user:
+```
+chmod -R 700 .ssh/
+```
+Now the permissions are as follows
+```
+-rwx------  1 akhanifa users 594 May 24 08:20 authorized_keys
+```
+This fixed my issue.
